@@ -36,7 +36,7 @@ src/
 │   ├── InvalidIndexException.java
 │   └── InvalidDescription.java
 └── enums/
-    └── ListOfPriority.java # LOW, MEDIUM, HIGH
+    └── ListOfPriority.java # NEUTRAL, HIGH
 ```
 
 ## Conceitos praticados

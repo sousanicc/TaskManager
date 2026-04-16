@@ -60,7 +60,7 @@ public class TaskService implements ITaskService {
 
     //endregion
 
-    //region auxiliar methods
+    //region auxiliary methods
 
     public boolean isIndexValid(int index){
 

@@ -42,7 +42,7 @@ public class TaskService implements ITaskService {
         if(tasks.isEmpty()){
             throw new EmptyListException("The list is empty");
         }
-        if(!isIndexValid(index)){
+        if(isIndexValid(index)){
             throw new InvalidIndexException("This index is invalid.");
         }
         tasks.get(index).setCompleted(aux);
@@ -52,7 +52,7 @@ public class TaskService implements ITaskService {
         if(tasks.isEmpty()){
             throw new EmptyListException("The list is empty");
         }
-        if(!isIndexValid(index)){
+        if(isIndexValid(index)){
             throw new InvalidIndexException("This index is invalid.");
         }
         tasks.remove(index);
@@ -64,7 +64,7 @@ public class TaskService implements ITaskService {
 
     public boolean isIndexValid(int index){
 
-        return index >= 0 && index < tasks.size();
+        return index < 0 || index >= tasks.size();
 
     }
 

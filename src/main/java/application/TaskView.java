@@ -3,6 +3,7 @@ package application;
 import entities.Task;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class TaskView {
@@ -23,11 +24,9 @@ public class TaskView {
         System.out.println("====================================");
     }
 
-    protected int catchDecision(){
+    protected String catchDecision(){
         System.out.print("Select an option: ");
-        int decision = scanner.nextInt();
-        scanner.nextLine();
-        return decision;
+        return scanner.nextLine();
     }
 
     protected String addTask(){
@@ -44,30 +43,76 @@ public class TaskView {
     }
 
     protected int completeTask(){
-        System.out.println("Which task do you want to mark as complete? ");
-        int index = scanner.nextInt();
-        index--;
-        return index;
+        String input;
+        int index;
+        boolean valid;
+        do {
+            System.out.println("Which task do you want to mark as complete? ");
+            input = scanner.nextLine();
+            valid = true;
+            try {
+                index = Integer.parseInt(input);
+            } catch (NumberFormatException e){
+                System.out.println("Please enter a valid number.");
+                valid = false;
+                index = 0;
+            }
+        } while (!valid);
+        return index - 1;
     }
 
     protected int uncompleteTask(){
-        System.out.println("Which task do you want to mark as unfinished? ");
-        int index = scanner.nextInt();
-        index--;
-        return index;
+        String input;
+        int index;
+        boolean valid;
+        do {
+            System.out.println("Which task do you want to mark as uncompleted? ");
+            input = scanner.nextLine();
+            valid = true;
+            try {
+                index = Integer.parseInt(input);
+            } catch (NumberFormatException e){
+                System.out.println("Please enter a valid number.");
+                valid = false;
+                index = 0;
+            }
+        } while (!valid);
+        return index - 1;
     }
 
     protected int removeTask(){
-        System.out.println("Which task do you want to remove? ");
-        int index = scanner.nextInt();
-        index--;
-        return index;
+        String input;
+        int index;
+        boolean valid;
+        do {
+            System.out.println("Which task do you want to remove? ");
+            input = scanner.nextLine();
+            valid = true;
+            try {
+                index = Integer.parseInt(input);
+            } catch (NumberFormatException e){
+                System.out.println("Please enter a valid number.");
+                valid = false;
+                index = 0;
+            }
+        } while (!valid);
+        return index - 1;
     }
 
     protected boolean isUrgent(){
         System.out.println("Is this task urgent? (y/n): ");
-        char answer = scanner.nextLine().charAt(0);
-        return answer == 'y';
+        String answer;
+        do {
+            answer = scanner.nextLine().toLowerCase();
+            if (isOptionValid(answer, "y", "n")){
+                System.out.println("Invalid option.");
+            }
+        }while (isOptionValid(String.valueOf(answer), "y", "n"));
+        return answer.equals("y");
+    }
+
+    protected boolean isOptionValid(String answer, String expected1, String expected2){
+        return !Objects.equals(answer, expected2) && !Objects.equals(answer, expected1);
     }
 
 }

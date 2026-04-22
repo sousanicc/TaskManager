@@ -19,7 +19,8 @@ public class Program {
         ITaskService service = new TaskService();
         TaskView taskView = new TaskView();
 
-        int decision;
+        String decision;
+        int isInitialized = 0;
 
         do {
 
@@ -27,7 +28,8 @@ public class Program {
             decision = taskView.catchDecision();
 
             switch (decision) {
-                case 1:
+                //region case1
+                case "1":
                     try {
                         String description = taskView.addTask();
                         boolean answer = taskView.isUrgent();
@@ -36,12 +38,17 @@ public class Program {
                         } else {
                             service.addTask(description);
                         }
+                        if (isInitialized==0){
+                            isInitialized++;
+                        }
                     }
                     catch (InvalidDescription i){
                         System.out.println(i.getMessage());
                     }
                     break;
-                case 2:
+                //endregion
+                //region case2
+                case "2":
                     try {
                         ArrayList<Task> list = service.listTasks();
                         taskView.listTasks(list);
@@ -50,8 +57,13 @@ public class Program {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 3:
+                //endregion
+                //region case3
+                case "3":
                     try {
+                        service.listTasks();
+                        ArrayList<Task> list = service.listTasks();
+                        taskView.listTasks(list);
                         int index = taskView.completeTask();
                         service.completed(index, true);
                     }
@@ -59,8 +71,13 @@ public class Program {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 4:
+                //endregion
+                //region case4
+                case "4":
                     try {
+                        service.listTasks();
+                        ArrayList<Task> list = service.listTasks();
+                        taskView.listTasks(list);
                         int index = taskView.uncompleteTask();
                         service.completed(index, false);
                     }
@@ -68,8 +85,13 @@ public class Program {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 5:
+                //endregion
+                //region case5
+                case "5":
                     try {
+                        service.listTasks();
+                        ArrayList<Task> list = service.listTasks();
+                        taskView.listTasks(list);
                         int index = taskView.removeTask();
                         service.removeTask(index);
                     }
@@ -77,14 +99,19 @@ public class Program {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 0:
+                //endregion
+                //region case0
+                case "0":
                     System.out.println("Leaving...");
                     break;
+                //endregion
+                //region default
                 default:
                     System.out.println("This option is not available. Try again.");
                     break;
+                //endregion
             }
-        }while(decision!=0);
+        }while(!decision.equals("0"));
         scanner.close();
     }
 }

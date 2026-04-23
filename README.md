@@ -58,5 +58,8 @@ O `ArrayList<Task>` armazena tanto `Task` quanto `UrgentTask`. O método `toStri
 **Exceções personalizadas**
 Validações centralizadas com fail fast: `InvalidDescription`, `InvalidIndexException` e `EmptyListException` estendem `RuntimeException` e são lançadas no ponto mais próximo do problema.
 
+**Validação de input**
+Inputs do usuário são validados com loops `do/while` — o programa continua pedindo até receber uma entrada válida. Entradas numéricas usam `Integer.parseInt` com `NumberFormatException` para rejeitar caracteres inválidos. Entradas de texto usam `toLowerCase()` para aceitar maiúsculas e minúsculas.
+
 **Enums**
 `ListOfPriority` representa os níveis de prioridade: `NEUTRAL`, `HIGH`.
